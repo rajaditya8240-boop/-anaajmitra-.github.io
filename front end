@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Crop Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #2e8b57;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #246b45;
+        }
+        .results, .video-section {
+            margin-top: 30px;
+        }
+        .video-section video {
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Simple Crop Assistant</h1>
+    <p>Get AI-based seasonal crop recommendations</p>
+</header>
+
+<div class="container">
+    <h2>Enter Your Farm Details</h2>
+    <form id="cropForm">
+        <label for="season">Season:</label>
+        <select id="season" required>
+            <option value="">Select Season</option>
+            <option value="Rabi">Rabi</option>
+            <option value="Kharif">Kharif</option>
+            <option value="Zaid">Zaid</option>
+        </select>
+
+        <label for="soil">Soil Type:</label>
+        <select id="soil" required>
+            <option value="">Select Soil</option>
+            <option value="Loamy">Loamy</option>
+            <option value="Sandy">Sandy</option>
+            <option value="Clay">Clay</option>
+        </select>
+
+        <label for="water">Water Availability:</label>
+        <select id="water" required>
+            <option value="">Select Water Level</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <button type="submit">Get Recommendation</button>
+    </form>
+
+    <div class="results" id="results"></div>
+
+    <div class="video-section">
+        <h2>How to Use This Tool</h2>
+        <video controls>
+            <source src="tutorial.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('cropForm');
+    const resultsDiv = document.getElementById('results');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const season = document.getElementById('season').value;
+        const soil = document.getElementById('soil').value;
+        const water = document.getElementById('water').value;
+
+        let recommendation = "";
+
+        // Simple logic to suggest crops
+        if(season === "Rabi" && soil === "Loamy" && water !== "Low") {
+            recommendation = "Wheat, Mustard";
+        } else if(season === "Kharif" && soil === "Clay" && water === "High") {
+            recommendation = "Rice, Maize";
+        } else if(season === "Zaid" && soil === "Sandy") {
+            recommendation = "Watermelon, Muskmelon";
+        } else {
+            recommendation = "Consult local expert for best crop.";
+        }
+
+        resultsDiv.innerHTML = `<h3>Recommended Crops:</h3><p>${recommendation}</p>`;
+    });
+</script>
+
+</body>
+</html>
 
